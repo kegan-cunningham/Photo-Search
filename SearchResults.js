@@ -9,14 +9,29 @@ import {
   FlatList,
   Text,
 } from 'react-native';
+import ImageDetails from './ImageDetails';
 
-export default class SearchResults extends Component<{}> {
-  keyExtractor = (item, index) => item.id.toString();
+export default class SearchResults extends React.Component {
+  keyExtractor = (item) => item.id.toString();
+
+  constructor(props) {
+    super(props);
+    this.selectItem = this.selectItem.bind(this);
+    this.renderItem = this.renderItem.bind(this);
+  }
+
+  selectItem (item) {
+    this.props.navigator.push({
+      title: 'Image',
+      component: ImageDetails,
+      passProps: {image: item}
+    });
+  }
 
   renderItem({item}) {
     return (
-      <TouchableHighlight onPress={() => selectItem(item)}>
-        <Image style={styles.imageSize} source={{ url: item.webformatURL }} />
+      <TouchableHighlight onPress={() => this.selectItem(item)}>
+        <Image style={styles.image} source={{ url: item.webformatURL }} />
       </TouchableHighlight>
     );
 
@@ -25,6 +40,7 @@ export default class SearchResults extends Component<{}> {
   render() {
     return (
       <FlatList
+        contentContainerStyle={styles.flowRight}
         data={this.props.hits}
         keyExtractor={this.keyExtractor}
         renderItem={this.renderItem}
@@ -34,8 +50,18 @@ export default class SearchResults extends Component<{}> {
 }
 
 const styles = StyleSheet.create({
-  imageSize: {
-    width: 200,
-    height: 200,
+  image: {
+    width: '48%',
+    margin: '0.5%',
+    aspectRatio: 1,
+    height: 185,
+    borderRadius: 20,
+  },
+  flowRight: {
+    flex: 0.5,
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });

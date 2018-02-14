@@ -43,7 +43,6 @@ export default class SearchPage extends Component<{}> {
   };
 
   search(query) {
-    console.log(query);
     this.setState({ isLoading: true });
     fetch(query)
       .then((response) => response.json())
@@ -58,7 +57,6 @@ export default class SearchPage extends Component<{}> {
 
   handleResponse(response) {
     let numResults = response.length
-    console.log('Images found: ' + numResults);
     this.setState({ isLoading: false , message: '' });
     this.props.navigator.push({
       title: 'Results',
