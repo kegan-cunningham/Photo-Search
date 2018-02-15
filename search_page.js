@@ -13,8 +13,7 @@ import {
 import SearchResults from './search_results';
 
 function urlForQueryAndPage(key, value, pageNumber) {
-  const data = {
-  };
+  const data = {};
   data[key] = value;
 
   const querystring = Object.keys(data)
@@ -27,11 +26,6 @@ function urlForQueryAndPage(key, value, pageNumber) {
 export default class SearchPage extends React.Component{
   constructor(props) {
     super(props);
-    this.state = {
-      searchString: 'cats',
-      isLoading: false,
-      message: '',
-    };
     this.handleSearchTextChange = this.handleSearchTextChange.bind(this);
     this.handleSearchButton = this.handleSearchButton.bind(this);
     this.handleResponse = this.handleResponse.bind(this);
@@ -39,25 +33,21 @@ export default class SearchPage extends React.Component{
   }
 
   handleSearchTextChange(event) {
-    this.setState({ searchString: event.nativeEvent.text });
+    this.props.updateSearchString(event.nativeEvent.text);
   };
 
   search(query) {
-    this.setState({ isLoading: true });
+    this.props.updateIsLoading(true);
     fetch(query)
       .then((response) => response.json())
       .then((json) => json.hits)
       .then(json => this.handleResponse(json))
-      .catch(error =>
-         this.setState({
-          isLoading: false,
-          message: 'Something bad happened ' + error
-       }));
+      .catch(error => this.props.updateIsLoading(false));
   };
 
   handleResponse(response) {
     let numResults = response.length
-    this.setState({ isLoading: false , message: '' });
+    this.props.updateIsLoading(false)
     this.props.navigator.push({
       title: 'Results',
       component: SearchResults,
@@ -66,12 +56,12 @@ export default class SearchPage extends React.Component{
   };
 
   handleSearchButton() {
-    const query = urlForQueryAndPage('q', this.state.searchString, 1);
+    const query = urlForQueryAndPage('q', this.props.searchString, 1);
     this.search(query);
   };
 
   render() {
-    const spinner = this.state.isLoading ? <ActivityIndicator size='large'/> : null;
+    const spinner = this.props.isLoading ? <ActivityIndicator size='large'/> : null;
     return (
       <View style={styles.container}>
         <Text style={styles.description}>
@@ -83,7 +73,7 @@ export default class SearchPage extends React.Component{
         <View style={styles.flowRight}>
           <TextInput
             style={styles.searchInput}
-            value={this.state.searchString}
+            value={this.props.searchString}
             onChange={this.handleSearchTextChange}
             placeholder='Search via name'/>
           <Button

@@ -4,7 +4,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { StyleSheet, Text, View, NavigatorIOS, } from 'react-native';
 import { portraitOrientation, landscapeOrientation } from './actions';
-import SearchPage from './search_page';
+import SearchPage from './search_page_container';
 
 class Main extends React.Component {
 

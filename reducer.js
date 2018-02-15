@@ -1,13 +1,19 @@
 import merge from 'lodash/merge';
+import { UPDATE_SEARCH_STRING, UPDATE_IS_LOADING } from './actions';
 
-const Reducer = (state = {}, action) => {
+const initialState = {
+  searchString: '',
+  isLoading: false,
+}
+
+const Reducer = (state = initialState, action) => {
   Object.freeze(state);
 
   switch (action.type) {
-    case 'PORTRAIT':
-      return merge({}, state, { orientation: 'portrait' });
-    case 'LANDSCAPE':
-      return merge({}, state, { orientation: 'landscape' });
+    case UPDATE_SEARCH_STRING:
+      return merge({}, state, { searchString: action.searchString });
+    case UPDATE_IS_LOADING:
+      return merge({}, state, { isLoading: action.isLoading });
     default:
       return state
   }
