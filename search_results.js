@@ -56,7 +56,6 @@ export default class SearchResults extends React.Component {
     if(this.state.orientation != orientation) {
       this.setState({orientation: orientation})
     }
-    console.log(this.state.orientation);
     return (
       <View onLayout={this.onLayout.bind(this)}>
         <FlatList
