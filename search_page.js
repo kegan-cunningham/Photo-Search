@@ -82,15 +82,21 @@ export default class SearchPage extends React.Component{
           </View>
         </View>
         {spinner}
+        <Image source={require('./images/search.png')} style={styles.image}/>
       </View>
     );
   }
 }
 
 const styles = StyleSheet.create({
+  image: {
+    marginTop: 20,
+    height: 220,
+    width: 220,
+  },
   description: {
     marginBottom: 20,
-    fontSize: 18,
+    fontSize: 25,
     textAlign: 'center',
     color: '#214068',
   },
@@ -110,7 +116,7 @@ const styles = StyleSheet.create({
     marginRight: 5,
     flexGrow: 1,
     fontSize: 18,
-    borderWidth: 1,
+    borderWidth: 2,
     borderColor: '#214068',
     borderRadius: 8,
     color: '#48BBEC',
