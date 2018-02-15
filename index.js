@@ -1,4 +1,22 @@
 import { AppRegistry } from 'react-native';
-import App from './App';
+import Main from './main';
+import React from 'react';
+import { createStore } from 'redux';
+import {Provider} from 'react-redux'
+import Reducer from './reducer';
+import configureStore from './store';
 
-AppRegistry.registerComponent('PhotoSearch', () => App);
+const store = configureStore();
+
+class PhotoSearch extends React.Component {
+
+  render() {
+    return (
+      <Provider store={store}>
+        <Main/>
+      </Provider>
+    );
+  }
+}
+
+AppRegistry.registerComponent('PhotoSearch', () => PhotoSearch);

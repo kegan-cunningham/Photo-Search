@@ -8,8 +8,9 @@ import {
   TouchableHighlight,
   FlatList,
   Text,
+  Dimensions,
 } from 'react-native';
-import ImageDetails from './ImageDetails';
+import ImageDetails from './image_details';
 
 export default class SearchResults extends React.Component {
   keyExtractor = (item) => item.id.toString();
@@ -18,6 +19,11 @@ export default class SearchResults extends React.Component {
     super(props);
     this.selectItem = this.selectItem.bind(this);
     this.renderItem = this.renderItem.bind(this);
+    const dim = Dimensions.get('screen');
+    const orientation = dim.width > dim.height ? 'landscape' : 'portrait';
+    this.state = {
+      orientation: orientation
+    }
   }
 
   selectItem (item) {
@@ -38,12 +44,18 @@ export default class SearchResults extends React.Component {
   };
 
   render() {
+    const dim = Dimensions.get('screen');
+    const orientation = dim.width > dim.height ? 'landscape' : 'portrait';
+    if(this.state.orientation != orientation) {
+      this.setState({orientation: orientation})
+    }
     return (
       <FlatList
-        contentContainerStyle={styles.flowRight}
+        contentContainerStyle={styles.list}
         data={this.props.hits}
         keyExtractor={this.keyExtractor}
         renderItem={this.renderItem}
+        numColumns={this.state.orientation == 'portrait' ? 2 : 3}
       />
     );
   }
@@ -51,17 +63,14 @@ export default class SearchResults extends React.Component {
 
 const styles = StyleSheet.create({
   image: {
-    width: '48%',
-    margin: '0.5%',
+    width: 200,
+    margin: 10,
     aspectRatio: 1,
     height: 185,
     borderRadius: 20,
   },
-  flowRight: {
-    flex: 0.5,
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    justifyContent: 'center',
-    alignItems: 'center',
+  list: {
+    marginRight: 'auto',
+    marginLeft: 'auto',
   },
 });

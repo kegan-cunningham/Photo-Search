@@ -1,6 +1,6 @@
 'use strict';
 
-import React, { Component } from 'react';
+import React from 'react';
 import {
   StyleSheet,
   Text,
@@ -10,7 +10,7 @@ import {
   ActivityIndicator,
   Image,
 } from 'react-native';
-import SearchResults from './SearchResults';
+import SearchResults from './search_results';
 
 function urlForQueryAndPage(key, value, pageNumber) {
   const data = {
@@ -24,7 +24,7 @@ function urlForQueryAndPage(key, value, pageNumber) {
   return `https://pixabay.com/api/?key=8043644-df349845d6f87762499318ed7&` + querystring;
 }
 
-export default class SearchPage extends Component<{}> {
+export default class SearchPage extends React.Component{
   constructor(props) {
     super(props);
     this.state = {

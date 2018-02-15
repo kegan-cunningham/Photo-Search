@@ -1,7 +1,7 @@
 import React from 'react';
 import { Text, ScrollView, Image, StyleSheet } from 'react-native';
 
-export default class ImageDetails extends React.Component{
+export default class ImageDetails extends React.Component {
 
   render() {
       const tagsWithHash = this.props.image.tags.split(', ').map(tag => `#${tag}`).join(' ');
