@@ -67,20 +67,19 @@ export default class SearchPage extends React.Component{
         <Text style={styles.description}>
           Search for your favorite images!
         </Text>
-        <Text style={styles.description}>
-          Search by image name.
-        </Text>
         <View style={styles.flowRight}>
           <TextInput
             style={styles.searchInput}
             value={this.props.searchString}
             onChange={this.handleSearchTextChange}
-            placeholder='Search via name'/>
-          <Button
-            onPress={this.handleSearchButton}
-            color='#48BBEC'
-            title='Search'
-          />
+            placeholder='What do you want to see?'/>
+          <View style={styles.searchButton}>
+            <Button
+              onPress={this.handleSearchButton}
+              color='white'
+              title='Search'
+            />
+          </View>
         </View>
         {spinner}
       </View>
@@ -93,12 +92,12 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     fontSize: 18,
     textAlign: 'center',
-    color: '#656565'
+    color: '#214068',
   },
   container: {
     padding: 30,
     marginTop: 65,
-    alignItems: 'center'
+    alignItems: 'center',
   },
   flowRight: {
     flexDirection: 'row',
@@ -106,14 +105,18 @@ const styles = StyleSheet.create({
     alignSelf: 'stretch',
   },
   searchInput: {
-    height: 36,
+    height: 35,
     padding: 4,
     marginRight: 5,
     flexGrow: 1,
     fontSize: 18,
     borderWidth: 1,
-    borderColor: '#48BBEC',
+    borderColor: '#214068',
     borderRadius: 8,
     color: '#48BBEC',
   },
+  searchButton: {
+    backgroundColor: '#214068',
+    borderRadius: 8,
+  }
 });

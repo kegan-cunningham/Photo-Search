@@ -40,8 +40,15 @@ export default class SearchResults extends React.Component {
         <Image style={styles.image} source={{ url: item.webformatURL }} />
       </TouchableHighlight>
     );
-
   };
+
+  onLayout(e) {
+    const dim = Dimensions.get('screen');
+    const orientation = dim.width > dim.height ? 'landscape' : 'portrait';
+    if(this.state.orientation != orientation) {
+      this.setState({orientation: orientation})
+    }
+  }
 
   render() {
     const dim = Dimensions.get('screen');
@@ -49,14 +56,18 @@ export default class SearchResults extends React.Component {
     if(this.state.orientation != orientation) {
       this.setState({orientation: orientation})
     }
+    console.log(this.state.orientation);
     return (
-      <FlatList
-        contentContainerStyle={styles.list}
-        data={this.props.hits}
-        keyExtractor={this.keyExtractor}
-        renderItem={this.renderItem}
-        numColumns={this.state.orientation == 'portrait' ? 2 : 3}
-      />
+      <View onLayout={this.onLayout.bind(this)}>
+        <FlatList
+          contentContainerStyle={styles.list}
+          data={this.props.hits}
+          keyExtractor={this.keyExtractor}
+          key={(this.state.orientation == 'landscape' ? 'h' : 'v')}
+          renderItem={this.renderItem}
+          numColumns={this.state.orientation == 'portrait' ? 2 : 3}
+        />
+      </View>
     );
   }
 }
@@ -72,5 +83,6 @@ const styles = StyleSheet.create({
   list: {
     marginRight: 'auto',
     marginLeft: 'auto',
+    marginTop: 10,
   },
 });
