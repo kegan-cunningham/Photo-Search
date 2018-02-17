@@ -11,7 +11,6 @@ import {
   Dimensions,
 } from 'react-native';
 import ImageDetails from '../image_details/image_details.js';
-import InfiniteScroll from 'react-native-infinite-scroll';
 
 export default class SearchResults extends React.Component {
   keyExtractor = (item) => item.id.toString();
