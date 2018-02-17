@@ -7,7 +7,6 @@ import {
   View,
   TouchableHighlight,
   FlatList,
-  List,
   Text,
   Dimensions,
 } from 'react-native';
@@ -26,10 +25,7 @@ export default class SearchResults extends React.Component {
     this.yOffset = 0;
     this.state = {
       orientation: orientation,
-      images: this.props.images
     }
-    this.images = this.props.images;
-    this.pageNumber = this.props.pageNumber;
     this.handleResponse = this.handleResponse.bind(this);
     this.loadMorePages = this.loadMorePages.bind(this);
     this.moreDataQuery = this.moreDataQuery.bind(this);
@@ -46,7 +42,7 @@ export default class SearchResults extends React.Component {
   renderItem({item}) {
     return (
       <TouchableHighlight onPress={() => this.selectItem(item)}>
-        <Image style={styles.image} source={{ url: item.webformatURL }} />
+        <Image key={item.webformatURL} style={styles.image} source={{ url: item.webformatURL }} />
       </TouchableHighlight>
     );
   };
@@ -60,7 +56,7 @@ export default class SearchResults extends React.Component {
   }
 
   loadMorePages() {
-    let query = this.moreDataQuery(this.pageNumber);
+    let query = this.moreDataQuery(this.props.pageNumber);
     this.props.updateIsLoading(true);
     fetch(query)
     .then((response) => response.json())
@@ -83,11 +79,9 @@ export default class SearchResults extends React.Component {
   }
 
   handleResponse(response) {
-    // this.props.loadMoreImages(response);
-    const newImages = this.state.images.concat(response)
-    this.setState({images: newImages});
+    this.props.loadMoreImages(response);
+    console.log(this.props.searchString);
     this.props.updateIsLoading(false)
-    this.pageNumber += 1;
   };
 
   render() {
@@ -102,7 +96,7 @@ export default class SearchResults extends React.Component {
             onEndReached={this.loadMorePages}
             onEndReachedThreshold={0.7}
             contentContainerStyle={styles.list}
-            data={this.state.images}
+            data={this.props.images}
             keyExtractor={this.keyExtractor}
             key={(this.state.orientation == 'landscape' ? 'h' : 'v')}
             renderItem={this.renderItem}
