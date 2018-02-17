@@ -21,7 +21,7 @@ const mapDispatchToProps = (dispatch) => {
 };
 ```
 
-![PhotoSearch](/images/Photo-Search.gif)
+![PhotoSearch](/app/images/Photo-Search.gif)
 
 ```
 search(query) {
