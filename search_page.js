@@ -10,7 +10,7 @@ import {
   ActivityIndicator,
   Image,
 } from 'react-native';
-import SearchResults from './search_results';
+import SearchResults from './search_results_container';
 
 function urlForQueryAndPage(key, value, pageNumber) {
   const data = {};
@@ -20,7 +20,7 @@ function urlForQueryAndPage(key, value, pageNumber) {
     .map(key => key + '=' + encodeURIComponent(data[key]))
     .join('&');
 
-  return `https://pixabay.com/api/?key=8043644-df349845d6f87762499318ed7&` + querystring;
+  return `https://pixabay.com/api/?key=8043644-df349845d6f87762499318ed7&page=${pageNumber}&per_page=10&` + querystring;
 }
 
 export default class SearchPage extends React.Component{
@@ -30,6 +30,9 @@ export default class SearchPage extends React.Component{
     this.handleSearchButton = this.handleSearchButton.bind(this);
     this.handleResponse = this.handleResponse.bind(this);
     this.search = this.search.bind(this);
+  }
+
+  componentWillReceiveProps(nextProps) {
   }
 
   handleSearchTextChange(event) {
@@ -47,6 +50,7 @@ export default class SearchPage extends React.Component{
 
   handleResponse(response) {
     let numResults = response.length
+    this.props.setImages(response);
     this.props.updateIsLoading(false)
     this.props.navigator.push({
       title: 'Results',
@@ -56,7 +60,7 @@ export default class SearchPage extends React.Component{
   };
 
   handleSearchButton() {
-    const query = urlForQueryAndPage('q', this.props.searchString, 1);
+    const query = urlForQueryAndPage('q', this.props.searchString, this.props.pageNumber);
     this.search(query);
   };
 
