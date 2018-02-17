@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import SearchResults from './search_results';
-import { updateIsLoading, loadMoreImages } from './actions.js';
+import { updateIsLoading, loadMoreImages } from '../../actions/actions.js';
 
 const mapStateToProps = (state) => {
   return {

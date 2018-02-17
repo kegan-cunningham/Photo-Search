@@ -10,7 +10,7 @@ import {
   Text,
   Dimensions,
 } from 'react-native';
-import ImageDetails from './image_details';
+import ImageDetails from '../image_details/image_details.js';
 import InfiniteScroll from 'react-native-infinite-scroll';
 
 export default class SearchResults extends React.Component {
@@ -98,7 +98,6 @@ export default class SearchResults extends React.Component {
             contentContainerStyle={styles.list}
             data={this.props.images}
             keyExtractor={this.keyExtractor}
-            key={(this.state.orientation == 'landscape' ? 'h' : 'v')}
             renderItem={this.renderItem}
             numColumns={this.state.orientation == 'portrait' ? 2 : 3}
           />

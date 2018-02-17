@@ -1,5 +1,5 @@
 import merge from 'lodash/merge';
-import { UPDATE_SEARCH_STRING, UPDATE_IS_LOADING, SET_IMAGES, LOAD_MORE_IMAGES } from './actions';
+import { UPDATE_SEARCH_STRING, UPDATE_IS_LOADING, SET_IMAGES, LOAD_MORE_IMAGES } from '../actions/actions.js';
 
 const initialState = {
   searchString: '',

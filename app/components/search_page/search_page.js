@@ -10,7 +10,7 @@ import {
   ActivityIndicator,
   Image,
 } from 'react-native';
-import SearchResults from './search_results_container';
+import SearchResults from '../search_results/search_results_container.js';
 
 function urlForQueryAndPage(key, value, pageNumber) {
   const data = {};
@@ -86,7 +86,7 @@ export default class SearchPage extends React.Component{
           </View>
         </View>
         {spinner}
-        <Image source={require('./images/search.png')} style={styles.image}/>
+        <Image source={require('../../images/search.png')} style={styles.image}/>
       </View>
     );
   }

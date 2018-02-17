@@ -3,7 +3,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { StyleSheet, Text, View, NavigatorIOS, } from 'react-native';
-import SearchPage from './search_page_container';
+import SearchPage from './components/search_page/search_page_container';
 
 export default class Main extends React.Component {
 
