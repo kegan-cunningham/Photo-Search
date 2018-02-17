@@ -7,6 +7,7 @@ import {
   View,
   TouchableHighlight,
   FlatList,
+  List,
   Text,
   Dimensions,
 } from 'react-native';
@@ -31,7 +32,7 @@ export default class SearchResults extends React.Component {
     this.pageNumber = this.props.pageNumber;
     this.handleResponse = this.handleResponse.bind(this);
     this.loadMorePages = this.loadMorePages.bind(this);
-    this.fetchMoreData = this.fetchMoreData.bind(this);
+    this.moreDataQuery = this.moreDataQuery.bind(this);
   }
 
   selectItem (item) {
@@ -59,7 +60,7 @@ export default class SearchResults extends React.Component {
   }
 
   loadMorePages() {
-    let query = this.fetchMoreData(this.pageNumber);
+    let query = this.moreDataQuery(this.pageNumber);
     this.props.updateIsLoading(true);
     fetch(query)
     .then((response) => response.json())
@@ -70,7 +71,7 @@ export default class SearchResults extends React.Component {
     });
   }
 
-  fetchMoreData(pageNumber) {
+  moreDataQuery(pageNumber) {
     const data = {};
     data['q'] = this.props.searchString;
 
@@ -82,7 +83,6 @@ export default class SearchResults extends React.Component {
   }
 
   handleResponse(response) {
-    let numResults = response.length
     // this.props.loadMoreImages(response);
     const newImages = this.state.images.concat(response)
     this.setState({images: newImages});
@@ -97,24 +97,18 @@ export default class SearchResults extends React.Component {
       this.setState({orientation: orientation})
     }
     return (
-      <InfiniteScroll
-        horizontal={false}
-        onLoadMoreAsync={this.loadMorePages}
-        distanceFromEnd={25}
-        style={styles.scrollView}
-      >
-        <View onLayout={this.onLayout.bind(this)} key={this.pageNumber + 'View'}>
+        <View onLayout={this.onLayout.bind(this)}>
           <FlatList
+            onEndReached={this.loadMorePages}
+            onEndReachedThreshold={0.7}
             contentContainerStyle={styles.list}
             data={this.state.images}
-            extraData = {this.state}
             keyExtractor={this.keyExtractor}
-            key={(this.state.orientation == 'landscape' ? 'h' + this.pageNumber : 'v' + this.pageNumber)}
+            key={(this.state.orientation == 'landscape' ? 'h' : 'v')}
             renderItem={this.renderItem}
             numColumns={this.state.orientation == 'portrait' ? 2 : 3}
           />
         </View>
-    </InfiniteScroll>
 
     );
   }
