@@ -11,9 +11,10 @@ import {
   Dimensions,
 } from 'react-native';
 import ImageDetails from '../image_details/image_details.js';
+import { CachedImage,ImageCacheProvider } from 'react-native-cached-image';
 
 export default class SearchResults extends React.Component {
-  keyExtractor = (item) => item.id.toString() + Math.random();
+  keyExtractor = (item) => item.id.toString();
 
   constructor(props) {
     super(props);
@@ -41,7 +42,7 @@ export default class SearchResults extends React.Component {
   renderItem({item}) {
     return (
       <TouchableHighlight onPress={() => this.selectItem(item)}>
-        <Image key={item.webformatURL} style={styles.image} source={{ url: item.webformatURL }} />
+        <CachedImage style={styles.image} source={{ uri: item.webformatURL }} />
       </TouchableHighlight>
     );
   };
