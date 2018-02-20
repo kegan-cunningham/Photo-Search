@@ -6,7 +6,7 @@ This app uses the Pixabay api to search for images. Upon searching, it displays 
 The app can be used in portrait or landscape mode, and the number of columns for results found adjust accordingly. Photo-Search was made by Kegan Cunningham using React-Native with Redux.
 
 
-![PhotoSearch](/app/images/InfiniteScroll.gif)
+![PhotoSearch](/app/images/Infinite-Scroll.gif)
 
 ```
 const mapStateToProps = (state) => {
