@@ -97,6 +97,7 @@ export default class SearchResults extends React.Component {
             onEndReachedThreshold={1}
             contentContainerStyle={styles.list}
             data={this.props.images}
+            key={(this.state.orientation == 'portrait' ? 'v' : 'h')}
             keyExtractor={this.keyExtractor}
             renderItem={this.renderItem}
             numColumns={this.state.orientation == 'portrait' ? 2 : 3}

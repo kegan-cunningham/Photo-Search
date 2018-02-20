@@ -7,6 +7,7 @@ import Reducer from './app/reducers/reducer';
 import configureStore from './app/store/store';
 
 const store = configureStore();
+console.disableYellowBox = true
 
 class PhotoSearch extends React.Component {
 
