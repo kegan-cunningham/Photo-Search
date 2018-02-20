@@ -93,7 +93,7 @@ export default class SearchResults extends React.Component {
         <View onLayout={this.onLayout.bind(this)}>
           <FlatList
             onEndReached={this.loadMorePages}
-            onEndReachedThreshold={0.7}
+            onEndReachedThreshold={1}
             contentContainerStyle={styles.list}
             data={this.props.images}
             keyExtractor={this.keyExtractor}
@@ -108,10 +108,10 @@ export default class SearchResults extends React.Component {
 
 const styles = StyleSheet.create({
   image: {
-    width: 200,
-    margin: 10,
+    width: 170,
+    margin: 7,
     aspectRatio: 1,
-    height: 185,
+    height: 165,
     borderRadius: 20,
   },
   list: {
