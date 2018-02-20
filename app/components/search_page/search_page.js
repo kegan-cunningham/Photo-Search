@@ -95,8 +95,8 @@ export default class SearchPage extends React.Component{
 const styles = StyleSheet.create({
   image: {
     marginTop: 20,
-    height: 220,
-    width: 220,
+    height: 170,
+    width: 170,
   },
   description: {
     marginBottom: 20,
