@@ -13,7 +13,7 @@ import {
 import ImageDetails from '../image_details/image_details.js';
 
 export default class SearchResults extends React.Component {
-  keyExtractor = (item) => item.id.toString();
+  keyExtractor = (item) => item.id.toString() + Math.random();
 
   constructor(props) {
     super(props);
