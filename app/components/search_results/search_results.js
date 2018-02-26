@@ -11,7 +11,7 @@ import {
   Dimensions,
 } from 'react-native';
 import ImageDetails from '../image_details/image_details.js';
-import { CachedImage,ImageCacheProvider } from 'react-native-cached-image';
+import { CachedImage, ImageCacheProvider } from 'react-native-cached-image';
 
 export default class SearchResults extends React.Component {
   keyExtractor = (item) => item.id.toString();
@@ -22,7 +22,6 @@ export default class SearchResults extends React.Component {
     this.renderItem = this.renderItem.bind(this);
     const dim = Dimensions.get('screen');
     const orientation = dim.width > dim.height ? 'landscape' : 'portrait';
-    this.yOffset = 0;
     this.state = {
       orientation: orientation,
     }
@@ -63,7 +62,6 @@ export default class SearchResults extends React.Component {
     .then((json) => json.hits)
     .then(json => this.handleResponse(json))
     .catch(error => {
-      console.log(error);
     });
   }
 
@@ -80,7 +78,6 @@ export default class SearchResults extends React.Component {
 
   handleResponse(response) {
     this.props.loadMoreImages(response);
-    console.log(this.props.searchString);
     this.props.updateIsLoading(false)
   };
 
