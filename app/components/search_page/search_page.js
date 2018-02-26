@@ -48,7 +48,7 @@ export default class SearchPage extends React.Component {
   handleResponse(response) {
     let numResults = response.length
     this.props.setImages(response);
-    this.props.updateIsLoading(false)
+    this.props.updateIsLoading(false);
     this.props.navigator.push({
       title: 'Results',
       component: SearchResults,

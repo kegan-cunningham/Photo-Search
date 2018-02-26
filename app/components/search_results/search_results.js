@@ -85,7 +85,7 @@ export default class SearchResults extends React.Component {
     const dim = Dimensions.get('screen');
     const orientation = dim.width > dim.height ? 'landscape' : 'portrait';
     if(this.state.orientation != orientation) {
-      this.setState({orientation: orientation})
+      this.setState({orientation: orientation});
     }
     return (
         <View onLayout={this.onLayout.bind(this)}>

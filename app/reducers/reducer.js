@@ -21,7 +21,7 @@ const Reducer = (state = initialState, action) => {
     case LOAD_MORE_IMAGES:
       return merge({}, state, { pageNumber: (state.pageNumber + 1), images: state.images.concat(action.images) });
     default:
-      return state
+      return state;
   }
 }
 
