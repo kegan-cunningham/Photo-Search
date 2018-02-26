@@ -23,7 +23,7 @@ function urlForQueryAndPage(key, value, pageNumber) {
   return `https://pixabay.com/api/?key=8043644-df349845d6f87762499318ed7&page=${pageNumber}&per_page=10&` + querystring;
 }
 
-export default class SearchPage extends React.Component{
+export default class SearchPage extends React.Component {
   constructor(props) {
     super(props);
     this.handleSearchTextChange = this.handleSearchTextChange.bind(this);
@@ -32,12 +32,9 @@ export default class SearchPage extends React.Component{
     this.search = this.search.bind(this);
   }
 
-  componentWillReceiveProps(nextProps) {
-  }
-
   handleSearchTextChange(event) {
     this.props.updateSearchString(event.nativeEvent.text);
-  };
+  }
 
   search(query) {
     this.props.updateIsLoading(true);
@@ -57,12 +54,12 @@ export default class SearchPage extends React.Component{
       component: SearchResults,
       passProps: {hits: response}
     });
-  };
+  }
 
   handleSearchButton() {
     const query = urlForQueryAndPage('q', this.props.searchString, this.props.pageNumber);
     this.search(query);
-  };
+  }
 
   render() {
     const spinner = this.props.isLoading ? <ActivityIndicator size='large'/> : null;
