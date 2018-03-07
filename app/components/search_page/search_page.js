@@ -37,12 +37,14 @@ export default class SearchPage extends React.Component {
   }
 
   search(query) {
-    this.props.updateIsLoading(true);
-    fetch(query)
-      .then((response) => response.json())
-      .then((json) => json.hits)
-      .then(json => this.handleResponse(json))
-      .catch(error => this.props.updateIsLoading(false));
+    if (this.props.isLoading === true) {
+      this.props.updateIsLoading(true);
+      fetch(query)
+        .then((response) => response.json())
+        .then((json) => json.hits)
+        .then(json => this.handleResponse(json))
+        .catch(error => this.props.updateIsLoading(false));
+    }
   };
 
   handleResponse(response) {
