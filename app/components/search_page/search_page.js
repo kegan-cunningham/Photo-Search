@@ -10,6 +10,7 @@ import {
   ActivityIndicator,
   Image,
 } from 'react-native';
+import Api from './config.js';
 import SearchResults from '../search_results/search_results_container.js';
 
 function urlForQueryAndPage(key, value, pageNumber) {
@@ -20,7 +21,7 @@ function urlForQueryAndPage(key, value, pageNumber) {
     .map(key => key + '=' + encodeURIComponent(data[key]))
     .join('&');
 
-  return `https://pixabay.com/api/?key=8043644-df349845d6f87762499318ed7&page=${pageNumber}&per_page=10&` + querystring;
+  return `https://pixabay.com/api/?key=${Api}&page=${pageNumber}&per_page=10&` + querystring;
 }
 
 export default class SearchPage extends React.Component {
@@ -104,8 +105,8 @@ const styles = StyleSheet.create({
     color: '#214068',
   },
   container: {
-    padding: 30,
-    marginTop: 65,
+    padding: 35,
+    marginTop: 68,
     alignItems: 'center',
   },
   flowRight: {
